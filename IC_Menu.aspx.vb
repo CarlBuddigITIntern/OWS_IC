@@ -102,7 +102,7 @@ Partial Public Class IC_Menu
                 Me.lbNewWrkSamplePallet.Text = ""
 
             Case "Slicing"
-                If _whs = "17" Then
+                If _whs = "17" Then 'Special treatment depending on whse
                     'Set Menu for Slicing Department
                     Me.lbFGPutaway.Text = "1. FG Putaway OWS Mont"                          ' 1. FG Putaway HF
                     Me.lbBinTransfer.Text = "2. Bin Transfer"                               ' 2. Bin Transfer
@@ -171,7 +171,7 @@ Partial Public Class IC_Menu
 
 
             Case "Shipping"
-                If _whs = "17" Then
+                If _whs = "17" Then 'Special treatment depending on whse
                     'Set Menu for Shipping Department
                     Me.lbFGPutaway.Text = "1. FG Recv From Plant 2"                             ' 1. FG Recv From Plant
                     Me.lbBinTransfer.Text = "2. Bin Transfer"                                   ' 2. Bin Transfer
@@ -215,7 +215,7 @@ Partial Public Class IC_Menu
                     Me.lbNewCrtSamplePallet.Text = "18. New-Crt Sample Pallet"                  '18. New-Crt Sample Pallet
                     Me.lbNewWrkSamplePallet.Text = "19. New-Wrk Sample Pallet"                  '19. New-Wrk Sample Pallet
                 End If
-                
+
             Case "CutDown"
                 'Set Menu for Shipping Department
                 Me.lbFGPutaway.Text = ""                                                ' 1. FG Recv From Plant
@@ -298,11 +298,11 @@ Partial Public Class IC_Menu
                     ElseIf Common.GetVariable("Department", Page) = "Combos" Then
                         strURL = "~/IC_ComboMenu.aspx"
                         Common.SaveVariable("ScreenParam", "", Page)
-                    ElseIf Common.GetVariable("Department", Page) = "Slicing" And _whs = "17" Then
+                    ElseIf Common.GetVariable("Department", Page) = "Slicing" And _whs = "17" Then 'Special treatment depending on whse
                         strURL = "~/IC_PutawayLot.aspx"
                         'strURL = "~/IC_PutawayMontHF.aspx"
                         Common.SaveVariable("ScreenParam", "", Page)
-                    ElseIf Common.GetVariable("Department", Page) = "Slicing" And _whs = "35" Then
+                    ElseIf Common.GetVariable("Department", Page) = "Slicing" And _whs = "35" Then 'Special treatment depending on whse
                     Else
                         strURL = "~/IC_PutawayLot.aspx"
                         Common.SaveVariable("ScreenParam", "", Page)
@@ -396,7 +396,7 @@ Partial Public Class IC_Menu
                         strURL = "~/IC_RepackPalletComponents.aspx"
                         Common.SaveVariable("ScreenParam", "", Page)
                     End If
-                    
+
                 Else
                     xBadSelect = True
                 End If
@@ -415,18 +415,18 @@ Partial Public Class IC_Menu
                 End If
 
             Case "10"
-                    If Me.lbReAssignPallet.Text.Length > 0 Then
-                        If Common.GetVariable("Department", Page) = "Slicing" Then
-                            strURL = "~/IC_LoadPalletOnPacklandTruck.aspx"
-                            Common.SaveVariable("ScreenParam", "", Page)
-                        ElseIf Common.GetVariable("Department", Page) = "Shipping" Then
-                            strURL = "~/IC_ShippingPalletReAssign.aspx"
-                            Common.SaveVariable("ScreenParam", "", Page)
-                        End If
-
-                    Else
-                        xBadSelect = True
+                If Me.lbReAssignPallet.Text.Length > 0 Then
+                    If Common.GetVariable("Department", Page) = "Slicing" Then
+                        strURL = "~/IC_LoadPalletOnPacklandTruck.aspx"
+                        Common.SaveVariable("ScreenParam", "", Page)
+                    ElseIf Common.GetVariable("Department", Page) = "Shipping" Then
+                        strURL = "~/IC_ShippingPalletReAssign.aspx"
+                        Common.SaveVariable("ScreenParam", "", Page)
                     End If
+
+                Else
+                    xBadSelect = True
+                End If
 
             Case "11"
                 If Me.lbNewNumTwoProcess.Text.Length > 0 Then
@@ -437,51 +437,51 @@ Partial Public Class IC_Menu
                         strURL = "~/IC_NumberTwoNew.aspx"
                         Common.SaveVariable("ScreenParam", "CREATE", Page)
                     End If
-                    
+
                 Else
                     xBadSelect = True
                 End If
 
             Case "12"
-                    If Me.lbPacklandNumber2.Text.Length > 0 Then
-                        strURL = "~/IC_NumberTwoPackland.aspx"
-                        Common.SaveVariable("ScreenParam", "", Page)
-                    Else
-                        xBadSelect = True
-                    End If
+                If Me.lbPacklandNumber2.Text.Length > 0 Then
+                    strURL = "~/IC_NumberTwoPackland.aspx"
+                    Common.SaveVariable("ScreenParam", "", Page)
+                Else
+                    xBadSelect = True
+                End If
 
             Case "13"
-                    If Me.lbCreateSamplePallet.Text.Length > 0 Then
-                        strURL = "~/IC_SamplePallet.aspx"
+                If Me.lbCreateSamplePallet.Text.Length > 0 Then
+                    strURL = "~/IC_SamplePallet.aspx"
+                    Common.SaveVariable("ScreenParam", "", Page)
+                Else
+                    xBadSelect = True
+                End If
+            Case "14"
+                If Me.lbWorkWithSamplePallet.Text.Length > 0 Then
+                    If Common.GetVariable("Department", Page) = "Shipping" Then
+                        strURL = "~/IC_WorkWithSamplePallet.aspx"
                         Common.SaveVariable("ScreenParam", "", Page)
                     Else
                         xBadSelect = True
                     End If
-            Case "14"
-                    If Me.lbWorkWithSamplePallet.Text.Length > 0 Then
-                        If Common.GetVariable("Department", Page) = "Shipping" Then
-                            strURL = "~/IC_WorkWithSamplePallet.aspx"
-                            Common.SaveVariable("ScreenParam", "", Page)
-                        Else
-                            xBadSelect = True
-                        End If
-                    Else
-                        xBadSelect = True
-                    End If
+                Else
+                    xBadSelect = True
+                End If
             Case "15"
-                    If Me.lbRecvAbbylandPallet.Text.Length > 0 Then
-                        If Common.GetVariable("Department", Page) = "Shipping" Then
-                            strURL = "~/IC_AbbylandPallet.aspx"
-                            Common.SaveVariable("ScreenParam", "", Page)
-                        ElseIf Common.GetVariable("Department", Page) = "Slicing" Then
-                            strURL = "~/IC_Putaway.aspx"
-                            Common.SaveVariable("ScreenParam", "", Page)
-                        Else
-                            xBadSelect = True
-                        End If
+                If Me.lbRecvAbbylandPallet.Text.Length > 0 Then
+                    If Common.GetVariable("Department", Page) = "Shipping" Then
+                        strURL = "~/IC_AbbylandPallet.aspx"
+                        Common.SaveVariable("ScreenParam", "", Page)
+                    ElseIf Common.GetVariable("Department", Page) = "Slicing" Then
+                        strURL = "~/IC_Putaway.aspx"
+                        Common.SaveVariable("ScreenParam", "", Page)
                     Else
                         xBadSelect = True
                     End If
+                Else
+                    xBadSelect = True
+                End If
 
             Case "16"
                 If Me.lbWrkShippingPallet.Text.Length > 0 Then
@@ -524,7 +524,7 @@ Partial Public Class IC_Menu
                 Common.SaveVariable("ScreenParam", "", Page)
 
             Case "92"
-                If _whs = "17" Then
+                If _whs = "17" Then 'Special treatment depending on whse
                     strURL = "http://kma2.carlbuddig.com/inventorycontrol/default.aspx"
                 Else
                     xBadSelect = True

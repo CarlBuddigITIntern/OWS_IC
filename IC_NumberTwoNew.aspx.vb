@@ -56,7 +56,7 @@ Partial Public Class IC_NumberTwoNew
         Me.lbCheese.Visible = False
         Me.lbEndsCurls.Visible = False
 
-        Select Case _whs
+        Select Case _whs 'Special treatment depending on whse
             Case Is = "17"
                 Me.lbLocation.Text = "MONTGOMERY"
             Case Is = "35"
@@ -240,7 +240,7 @@ Partial Public Class IC_NumberTwoNew
                         Me.lbPrompt.Text = "Re-Enter Supervisor Override Code"
                         Common.JavaScriptSetFocus(Page, Me.txData)
                     End If
-                    
+
             End Select
         Catch ex As Exception
 
@@ -306,7 +306,7 @@ Partial Public Class IC_NumberTwoNew
         Catch ex As Exception
             ProcessCaseLabel = False
         End Try
-        
+
     End Function
 
     Protected Sub btReturn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btReturn.Click
@@ -355,7 +355,7 @@ Partial Public Class IC_NumberTwoNew
             sqlConn.Open()
             sqlCmdWriteNumberTwo.CommandType = CommandType.StoredProcedure
 
-            Select Case _whs
+            Select Case _whs 'Special treatment depending on whse
                 Case Is = "17"
                     sqlCmdWriteNumberTwo.CommandText = "insertNumberTwoNewVer17 "
                 Case Is = "35"
